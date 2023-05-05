@@ -185,7 +185,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="Create New Account"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
