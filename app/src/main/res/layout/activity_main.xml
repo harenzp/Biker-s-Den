@@ -85,6 +85,7 @@
                 android:layout_marginTop="60dp"
                 android:fontFamily="@font/open_sans_semibold"
                 android:text="Sign in"
+                android:backgroundTint="@color/red"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
