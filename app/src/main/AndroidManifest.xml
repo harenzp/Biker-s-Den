@@ -12,6 +12,9 @@
         android:theme="@style/Theme.BikersDen"
         tools:targetApi="31">
         <activity
+            android:name=".Introduction"
+            android:exported="false" />
+        <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity

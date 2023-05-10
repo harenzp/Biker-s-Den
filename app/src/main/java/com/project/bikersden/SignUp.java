@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-public class SignUp extends AppCompatActivity {
+public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     private EditText firstNameText, lastNameText, bdayText, phoneText, emailText;
     private RadioButton male, female;
@@ -20,52 +20,45 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        firstNameText = findViewById(R.id.firstName);
-        lastNameText = findViewById(R.id.lastName);
-        bdayText = findViewById(R.id.bday);
-        phoneText = findViewById(R.id.phone);
-        emailText = findViewById(R.id.email);
+        firstNameText = (EditText) findViewById(R.id.firstName);
+        lastNameText = (EditText) findViewById(R.id.lastName);
+        bdayText = (EditText) findViewById(R.id.bday);
+        phoneText = (EditText) findViewById(R.id.phone);
+        emailText = (EditText) findViewById(R.id.email);
 
-        male = findViewById(R.id.btnMale);
-        female = findViewById(R.id.btnFemale);
+        male = (RadioButton) findViewById(R.id.btnMale);
+        female = (RadioButton) findViewById(R.id.btnFemale);
 
-        clear = findViewById(R.id.btnClear);
-        submit = findViewById(R.id.btnSubmit);
+        clear = (Button) findViewById(R.id.btnClear);
+        submit = (Button) findViewById(R.id.btnSubmit);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendData();
+        submit.setOnClickListener(this);
+        clear.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+            switch(view.getId()){
+                case R.id.btnSubmit:
+                    firstName = firstNameText.getText().toString().trim();
+                    lastName = lastNameText.getText().toString().trim();
+                    name = firstName.concat(" ").concat(lastName);
+                    bday = bdayText.getText().toString().trim();
+                    phone = phoneText.getText().toString().trim();
+                    email = emailText.getText().toString().trim();
+                    gender = (male.isSelected()) ? "male":"female";
+                    break;
+                case R.id.btnClear:
+                    firstNameText.setText("");
+                    lastNameText.setText("");
+                    bdayText.setText("");
+                    phoneText.setText("");
+                    emailText.setText("");
+                    break;
             }
-        });
-
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearData();
-            }
-        });
-
     }
 
-    public void sendData(){
-        firstName = firstNameText.getText().toString().trim();
-        lastName = lastNameText.getText().toString().trim();
-        name = firstName.concat(" ").concat(lastName);
-        bday = bdayText.getText().toString().trim();
-        phone = phoneText.getText().toString().trim();
-        email = emailText.getText().toString().trim();
 
-        if (female.isSelected()) gender = "Female";
-        else gender = "Male";
-    }
-
-    public void clearData(){
-        firstNameText.setText("");
-        lastNameText.setText("");
-        bdayText.setText("");
-        phoneText.setText("");
-        emailText.setText("");
-    }
 
 }

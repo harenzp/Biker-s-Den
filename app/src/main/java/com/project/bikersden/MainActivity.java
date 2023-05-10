@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView newAccount;
 
@@ -20,19 +20,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        newAccount = findViewById(R.id.newAccount);
+        newAccount = (TextView) findViewById(R.id.newAccount);
+        newAccount.setOnClickListener(this);
 
-        newAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openSignUp();
-            }
-        });
     }
 
-    public void openSignUp() {
-        Intent intent = new Intent(this, SignUp.class);
-        startActivity(intent);
+
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(MainActivity.this,SignUp.class));
     }
+
+
+
+
 }
 
