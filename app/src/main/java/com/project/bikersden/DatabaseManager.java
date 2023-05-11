@@ -1,6 +1,7 @@
 package com.project.bikersden;
 
 
+import android.database.Cursor;
 import android.database.sqlite.*;
 import android.content.*;
 
@@ -17,15 +18,18 @@ public class DatabaseManager extends SQLiteOpenHelper{
     public static final String columnPHONE = "phone";
     public static final String columnGENDER = "gender";
 
+    public static final String columnPassword  = "password";
+
+
 
     public DatabaseManager(@Nullable Context context) {
-       super(context,  "accountuser.db",null,1);
+       super(context,  "useraccounts.db",null,1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String makeTable = "CREATE TABLE " + columnUSER + "(" + columnID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + columnNAME + " TEXT, " + columnBDAY +
-                " TEXT, " + columnGMAIL + " TEXT, " + columnPHONE + " TEXT, " + columnGENDER + " TEXT)";
+                " TEXT, " + columnGMAIL + " TEXT, " + columnPassword +" TEXT, "+ columnPHONE + " TEXT, " + columnGENDER + " TEXT)";
         db.execSQL(makeTable);
     }
 
@@ -35,22 +39,61 @@ public class DatabaseManager extends SQLiteOpenHelper{
     }
 
 
-    public String addAccount(String name, String bday, String gmail, String phone, String gender){
+    public String addAccount(String name, String bday, String email,String password, String phone, String gender){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
 
         values.put(columnNAME, name);
         values.put(columnBDAY, bday);
-        values.put(columnGMAIL, gmail);
+        values.put(columnGMAIL, email);
+        values.put(columnPassword,password);
         values.put(columnPHONE, phone);
         values.put(columnGENDER, gender);
 
         long result = db.insert(columnUSER,null,values);
+        db.close();
             if(result == -1){
-              return "Failed";
+              return "Account Creation Failed";
             }
-            return "Success";
+            return "Account Created";
+    }
+
+    public boolean loginAccount(String gmail, String password){
+
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] projection = {
+                "gmail",
+                "password"
+        };
+
+        // Define the selection criteria
+        String selection = "gmail = ? AND password = ?";
+        String[] selectionArgs = { gmail, password };
+
+        // Query the user table
+        Cursor cursor = db.query(
+                "user",
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        // Check if the cursor has any rows
+        boolean result = cursor.moveToFirst();
+
+        // Close the cursor and database when finished
+        cursor.close();
+        db.close();
+
+        // Return the result
+        return result;
+
+
     }
 
 }

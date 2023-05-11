@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText firstNameText, lastNameText, bdayText, phoneText, emailText;
+    private EditText firstNameText, lastNameText, bdayText, phoneText, emailText,passwordText;
     private RadioButton male, female;
     private Button clear, submit;
-    private String firstName, lastName, bday, phone, email, name, gender;
+    private String firstName, lastName, bday, phone, email, name, gender,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         bdayText = (EditText) findViewById(R.id.bday);
         phoneText = (EditText) findViewById(R.id.phone);
         emailText = (EditText) findViewById(R.id.email);
-
+        passwordText = (EditText) findViewById(R.id.password);
         male = (RadioButton) findViewById(R.id.btnMale);
         female = (RadioButton) findViewById(R.id.btnFemale);
-
         clear = (Button) findViewById(R.id.btnClear);
         submit = (Button) findViewById(R.id.btnSubmit);
-
         submit.setOnClickListener(this);
         clear.setOnClickListener(this);
 
@@ -52,9 +50,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 bday = bdayText.getText().toString().trim();
                 phone = phoneText.getText().toString().trim();
                 email = emailText.getText().toString().trim();
-                gender = "male";
+                password = passwordText.getText().toString().trim();
+                if(male.isSelected()){
+                    gender = "male";
+                }else{
+                    gender = "female";
+                }
                 DatabaseManager db = new DatabaseManager(SignUp.this);
-              String success =  db.addAccount(name,bday,email,phone,gender);
+                String success =  db.addAccount(name,bday,email,password,phone,gender);
                 Toast.makeText(SignUp.this,success, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnClear:
@@ -67,6 +70,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
+
+
 
 
 
