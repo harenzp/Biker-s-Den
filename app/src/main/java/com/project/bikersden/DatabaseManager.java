@@ -17,6 +17,7 @@ public class DatabaseManager extends SQLiteOpenHelper{
     public static final String columnPHONE = "phone";
     public static final String columnGENDER = "gender";
 
+
     public DatabaseManager(@Nullable Context context) {
        super(context,  "accountuser.db",null,1);
     }
