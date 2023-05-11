@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,26 +38,34 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+
+
     @Override
     public void onClick(View view) {
-            switch(view.getId()){
-                case R.id.btnSubmit:
-                    firstName = firstNameText.getText().toString().trim();
-                    lastName = lastNameText.getText().toString().trim();
-                    name = firstName.concat(" ").concat(lastName);
-                    bday = bdayText.getText().toString().trim();
-                    phone = phoneText.getText().toString().trim();
-                    email = emailText.getText().toString().trim();
-                    gender = (male.isSelected()) ? "male":"female";
-                    break;
-                case R.id.btnClear:
-                    firstNameText.setText("");
-                    lastNameText.setText("");
-                    bdayText.setText("");
-                    phoneText.setText("");
-                    emailText.setText("");
-                    break;
-            }
+
+
+        switch(view.getId()){
+            case R.id.btnSubmit:
+                firstName = firstNameText.getText().toString().trim();
+                lastName = lastNameText.getText().toString().trim();
+                name = firstName.concat(" ").concat(lastName);
+                bday = bdayText.getText().toString().trim();
+                phone = phoneText.getText().toString().trim();
+                email = emailText.getText().toString().trim();
+                gender = "male";
+                DatabaseManager db = new DatabaseManager(SignUp.this);
+              String success =  db.addAccount(name,bday,email,phone,gender);
+                Toast.makeText(SignUp.this,success, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btnClear:
+                firstNameText.setText("");
+                lastNameText.setText("");
+                bdayText.setText("");
+                phoneText.setText("");
+                emailText.setText("");
+                break;
+        }
+
     }
 
 
