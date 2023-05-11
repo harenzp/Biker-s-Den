@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
@@ -16,12 +17,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private RadioButton male, female;
     private Button clear, submit;
     private String firstName, lastName, bday, phone, email, name, gender,password;
+    private RadioGroup group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        group = (RadioGroup) findViewById(R.id.radioGroup);
         firstNameText = (EditText) findViewById(R.id.firstName);
         lastNameText = (EditText) findViewById(R.id.lastName);
         bdayText = (EditText) findViewById(R.id.bday);
@@ -34,6 +37,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         submit = (Button) findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
         clear.setOnClickListener(this);
+//
+//        group.addView(male);
+//        group.addView(female);
 
     }
 
