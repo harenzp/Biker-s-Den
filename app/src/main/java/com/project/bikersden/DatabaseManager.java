@@ -4,7 +4,6 @@ package com.project.bikersden;
 import android.database.Cursor;
 import android.database.sqlite.*;
 import android.content.*;
-
 import androidx.annotation.Nullable;
 
 public class DatabaseManager extends SQLiteOpenHelper{
@@ -62,7 +61,7 @@ public class DatabaseManager extends SQLiteOpenHelper{
     public boolean loginAccount(String gmail, String password){
 
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String[] projection = {
                 "gmail",
                 "password"

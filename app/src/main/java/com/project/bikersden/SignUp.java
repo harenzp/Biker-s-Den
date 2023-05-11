@@ -2,6 +2,7 @@ package com.project.bikersden;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -59,6 +60,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 DatabaseManager db = new DatabaseManager(SignUp.this);
                 String success =  db.addAccount(name,bday,email,password,phone,gender);
                 Toast.makeText(SignUp.this,success, Toast.LENGTH_SHORT).show();
+                if(success.equals("Account Created")){
+                    startActivity(new Intent(SignUp.this,MainActivity.class));
+                }
                 break;
             case R.id.btnClear:
                 firstNameText.setText("");
