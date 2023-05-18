@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     DatabaseManager.setGmail(gmail);
                     DatabaseManager.setPass(pass);
                     db.getDataByName();
+
                     Toast.makeText(MainActivity.this, "Welcome " + db.userName, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this,WelcomeScreen.class));
                 }else{
