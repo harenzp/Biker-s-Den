@@ -3,6 +3,7 @@ package com.project.bikersden;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -151,11 +153,21 @@ public class Shop extends AppCompatActivity {
             textViewProductDescription.setText(product.getDescription());
             textViewPrice.setText(product.getPrice());
 
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Start ProductDescriptionActivity with the selected product
+                    Intent intent = new Intent(context, ProductDescription.class);
+                    intent.putExtra("product", product);
+                    context.startActivity(intent);
+                }
+            });
+
             return convertView;
         }
     }
 
-    private static class Product {
+    static class Product implements Serializable{
         private String name, description, price;
         private int imageResourceId;
 
