@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -47,7 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String pass =  password.getText().toString().trim();
                 DatabaseManager db = new DatabaseManager(MainActivity.this);
                 if(db.loginAccount(gmail,pass)){
-                    Toast.makeText(MainActivity.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                    DatabaseManager.setGmail(gmail);
+                    DatabaseManager.setPass(pass);
+                    db.getDataByName();
+                    Toast.makeText(MainActivity.this, "Welcome " + db.userName, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this,WelcomeScreen.class));
                 }else{
                     Toast.makeText(MainActivity.this, "Login Failed. Incorrect gmail or password", Toast.LENGTH_SHORT).show();

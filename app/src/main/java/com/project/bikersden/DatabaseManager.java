@@ -4,7 +4,11 @@ package com.project.bikersden;
 import android.database.Cursor;
 import android.database.sqlite.*;
 import android.content.*;
+import android.provider.ContactsContract;
+
 import androidx.annotation.Nullable;
+
+import java.io.Closeable;
 
 public class DatabaseManager extends SQLiteOpenHelper{
 
@@ -18,6 +22,9 @@ public class DatabaseManager extends SQLiteOpenHelper{
     public static final String columnGENDER = "gender";
 
     public static final String columnPassword  = "password";
+
+
+    public static String userGmail = "",userPass = "",userName = "",userBday = "",userPhone = "",userGender = "";
 
 
 
@@ -94,5 +101,41 @@ public class DatabaseManager extends SQLiteOpenHelper{
 
 
     }
+
+
+    public static void setGmail(String name){
+        userGmail = name;
+    }
+
+    public static void setPass(String password) {
+        userPass = password;
+    }
+
+
+    public void getDataByName() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] projection = {columnNAME, columnBDAY, columnPHONE, columnGENDER};
+        String selection = columnGMAIL + " = ?";
+        String[] selectionArgs = {userGmail};
+
+        Cursor cursor =  db.query(columnUSER, projection, selection, selectionArgs, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            userName = cursor.getString(0);
+            userBday = cursor.getString(1);
+            userPhone = cursor.getString(2);
+            userGender = cursor.getString(3);
+        }
+
+
+
+            db.close();
+            cursor.close();
+
+    }
+
+
+
 
 }

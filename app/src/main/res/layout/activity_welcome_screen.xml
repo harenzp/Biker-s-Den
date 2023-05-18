@@ -17,6 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
+
+
     <TextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"

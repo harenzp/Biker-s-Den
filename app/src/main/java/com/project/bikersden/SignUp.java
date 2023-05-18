@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -32,17 +33,25 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         emailText = (EditText) findViewById(R.id.email);
         passwordText = (EditText) findViewById(R.id.password);
         male = (RadioButton) findViewById(R.id.btnMale);
+        male.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    gender = "Male";
+                }else{
+                    gender = "Female";
+
+                }
+            }
+        });
+
         female = (RadioButton) findViewById(R.id.btnFemale);
         clear = (Button) findViewById(R.id.btnClear);
         submit = (Button) findViewById(R.id.btnSubmit);
         submit.setOnClickListener(this);
         clear.setOnClickListener(this);
-//
-//        group.addView(male);
-//        group.addView(female);
 
     }
-
 
 
     @Override
@@ -58,11 +67,6 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 phone = phoneText.getText().toString().trim();
                 email = emailText.getText().toString().trim();
                 password = passwordText.getText().toString().trim();
-                if(male.isSelected()){
-                    gender = "male";
-                }else{
-                    gender = "female";
-                }
                 DatabaseManager db = new DatabaseManager(SignUp.this);
                 String success =  db.addAccount(name,bday,email,password,phone,gender);
                 Toast.makeText(SignUp.this,success, Toast.LENGTH_SHORT).show();
