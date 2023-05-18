@@ -28,6 +28,7 @@ public class Shop extends AppCompatActivity {
     private List<Product> productList;
     private EditText editTextSearch;
     private Button buttonSearch;
+    private ImageView viewCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,35 +38,10 @@ public class Shop extends AppCompatActivity {
         listViewProducts = findViewById(R.id.listViewProducts);
         editTextSearch = findViewById(R.id.editTextSearch);
         buttonSearch = findViewById(R.id.buttonSearch);
+        viewCart = findViewById(R.id.carticon);
 
         // Populate the product list (dummy data for demonstration)
         productList = new ArrayList<>();
-
-        productList.add(new Product("Frisco Sportster Gas Tank", R.drawable.frisco,
-                "Frisco Mount Sportster Gas Tank - Standard Width - Bayonet Filler - 2.5 gallon", "₱6000"));
-        productList.add(new Product("Keystone Handlebar", R.drawable.zbars,
-                "Keystone Handlebars - 7/8 inch - Black", "₱2200"));
-        productList.add(new Product("Firestone Sawtooth Tires", R.drawable.firestone,
-                "Firestone Deluxe Champion Motorcycle Tire 5.00 - 16", "₱4300"));
-        productList.add(new Product("Shotgun Exhaust", R.drawable.shotgun,
-                "Hi Lo Shotgun Exhaust Pipe Set 1986-2003 Harley-Davidson", "₱7000"));
-        productList.add(new Product("Ape Hanger Handlebar", R.drawable.apehanger,
-                "Mini Ape Hanger Handlebars - 1 inch - 9 inch Rise - Chrome", "₱2000"));
-        productList.add(new Product("Shinko SR777 Tires", R.drawable.shinko,
-                "SR777 Whitewall Rear Motorcycle Tire - 130/90B16", "₱5600"));
-        productList.add(new Product("Bates Baja Tires", R.drawable.bates,
-                "Baja 100 Tire 16\" - 5.00-16 71T", "₱4700"));
-        productList.add(new Product("T-Bars Handlebars", R.drawable.tbars,
-                "T-Bars Handlebars - 10 inch Rise - 1 inch - Chrome", "₱3000"));
-        productList.add(new Product("Cone Shovelhead Exhaust", R.drawable.coneshovelhead,
-                "Exhaust Pipe Set 2-into-1 1970-84 Harley Cone Shovelhead", "₱6600"));
-        productList.add(new Product("Wassell Peanut Gas Tank", R.drawable.peanut,
-                "Wassell Peanut Mid-Tunnel Gas Tank 2.1 gallon", "₱2900"));
-        productList.add(new Product("WX Split Gas Tanks", R.drawable.split,
-                "WX Split Gas Tanks - Bolt-On for 1936 - 1984 Big Twin", "₱3400"));
-        productList.add(new Product("Dyna Exhaust Pipe", R.drawable.dyna,
-                "W2 into 1 Exhaust System 1999-2005 H-D Dyna", "₱8000"));
-        // ...
 
         // Create and set the adapter
         adapter = new ProductAdapter(this, productList);
@@ -104,6 +80,40 @@ public class Shop extends AppCompatActivity {
                 editTextSearch.setText("");
             }
         });
+
+        viewCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // cart layout
+                startActivity(new Intent(Shop.this,Cart.class));
+            }
+        });
+
+        productList.add(new Product("Frisco Sportster Gas Tank", R.drawable.frisco,
+                "Frisco Mount Sportster Gas Tank - Standard Width - Bayonet Filler - 2.5 gallon", "₱6000"));
+        productList.add(new Product("Keystone Handlebar", R.drawable.zbars,
+                "Keystone Handlebars - 7/8 inch - Black", "₱2200"));
+        productList.add(new Product("Firestone Sawtooth Tires", R.drawable.firestone,
+                "Firestone Deluxe Champion Motorcycle Tire 5.00 - 16", "₱4300"));
+        productList.add(new Product("Shotgun Exhaust", R.drawable.shotgun,
+                "Hi Lo Shotgun Exhaust Pipe Set 1986-2003 Harley-Davidson", "₱7000"));
+        productList.add(new Product("Ape Hanger Handlebar", R.drawable.apehanger,
+                "Mini Ape Hanger Handlebars - 1 inch - 9 inch Rise - Chrome", "₱2000"));
+        productList.add(new Product("Shinko SR777 Tires", R.drawable.shinko,
+                "SR777 Whitewall Rear Motorcycle Tire - 130/90B16", "₱5600"));
+        productList.add(new Product("Bates Baja Tires", R.drawable.bates,
+                "Baja 100 Tire 16\" - 5.00-16 71T", "₱4700"));
+        productList.add(new Product("T-Bars Handlebars", R.drawable.tbars,
+                "T-Bars Handlebars - 10 inch Rise - 1 inch - Chrome", "₱3000"));
+        productList.add(new Product("Cone Shovelhead Exhaust", R.drawable.coneshovelhead,
+                "Exhaust Pipe Set 2-into-1 1970-84 Harley Cone Shovelhead", "₱6600"));
+        productList.add(new Product("Wassell Peanut Gas Tank", R.drawable.peanut,
+                "Wassell Peanut Mid-Tunnel Gas Tank 2.1 gallon", "₱2900"));
+        productList.add(new Product("WX Split Gas Tanks", R.drawable.split,
+                "WX Split Gas Tanks - Bolt-On for 1936 - 1984 Big Twin", "₱3400"));
+        productList.add(new Product("Dyna Exhaust Pipe", R.drawable.dyna,
+                "W2 into 1 Exhaust System 1999-2005 H-D Dyna", "₱8000"));
+        // ...
     }
 
     private class ProductAdapter extends BaseAdapter {

@@ -10,6 +10,15 @@
     tools:context=".ProductDescription">
 
     <ImageView
+        android:id="@+id/carticon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/shoppingcart" />
+
+    <ImageView
         android:id="@+id/imageViewProduct"
         android:layout_width="300dp"
         android:layout_height="300dp"
