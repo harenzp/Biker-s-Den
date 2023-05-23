@@ -14,16 +14,18 @@ import android.widget.Button;
 public class WelcomeScreen extends AppCompatActivity {
 
 
-    Button shopBtn;
+    Button shopBtn, servicesBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
 
 
-        shopBtn = (Button) findViewById(R.id.button2);
-
+        shopBtn = (Button) findViewById(R.id.shop);
         shopBtn.setOnClickListener(new shopBtnListener());
+
+        servicesBtn = (Button) findViewById(R.id.services);
+        servicesBtn.setOnClickListener(new servicesBtnListener());
 
 
     }
@@ -36,6 +38,14 @@ public class WelcomeScreen extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             startActivity(new Intent(WelcomeScreen.this,Shop.class));
+        }
+    }
+
+    public class servicesBtnListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(WelcomeScreen.this,Services.class));
         }
     }
 

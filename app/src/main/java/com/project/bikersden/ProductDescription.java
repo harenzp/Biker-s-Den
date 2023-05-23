@@ -23,6 +23,7 @@ public class ProductDescription extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_description);
+        getSupportActionBar().hide();
 
         // Retrieve the serialized product object from intent extras
         Product product = (Product) getIntent().getSerializableExtra("product");

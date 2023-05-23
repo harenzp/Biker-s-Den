@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/girl2"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Services">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Schedule a service"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        />
+
+    <CheckBox
+        android:id="@+id/brakeservice"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Brake repair"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+    <CheckBox
+        android:id="@+id/engineservice"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Engine tune-up"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+    <CheckBox
+        android:id="@+id/changeoil"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Change oil"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+    <CheckBox
+        android:id="@+id/alignment"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Fork and handlebar alignment"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+    <CheckBox
+        android:id="@+id/wheelalignment"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Wheel alignment"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+    <CheckBox
+        android:id="@+id/carburetor"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Carburetor tune-up"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+    <CheckBox
+        android:id="@+id/exhaust"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:text="Electrical works"
+        android:textColor="@color/white"
+        android:background="#33000000"
+        />
+
+    <Button
+        android:id="@+id/proceed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Proceed"
+        />
+
+</LinearLayout>

@@ -55,7 +55,7 @@ public class Profile extends AppCompatActivity {
 
         profile = (ImageView) findViewById(R.id.your_imageview_id);
         if(DatabaseManager.userGender.equals("Male")){
-            profile.setImageResource(R.drawable.harenz);
+            profile.setImageResource(R.drawable.johnnybert);
         }
 
 

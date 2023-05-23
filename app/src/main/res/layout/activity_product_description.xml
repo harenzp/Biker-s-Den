@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     android:padding="16dp"
     tools:context=".ProductDescription">
 
@@ -15,19 +16,26 @@
         android:layout_height="30dp"
         android:layout_marginStart="330dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/shoppingcart" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewProduct"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center_horizontal"
         android:scaleType="centerCrop"
-        android:src="@drawable/frisco" />
+        android:src="@drawable/frisco"
+        app:shapeAppearanceOverlay="@style/roundedImageView"/>
 
     <TextView
         android:id="@+id/textPrice"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center_horizontal"
+        android:text="777"
+        android:textSize="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -37,8 +45,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:text="Product Name"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp" />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textViewProductDescription"
@@ -46,30 +53,31 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:text="Product Description"
+        android:textColor="@color/white"
         android:paddingBottom="8dp" />
 
     <Button
         android:id="@+id/buttonAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Cart"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp" />
+        android:layout_marginBottom="20dp"
+        android:text="Add to Cart" />
 
     <EditText
         android:id="@+id/editTextReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your review"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/black"
+        android:background="@drawable/round_edittext"
         android:paddingTop="16dp"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="16dp" />
 
     <Button
         android:id="@+id/buttonAddReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Review"
-        android:paddingTop="8dp"
-        android:paddingBottom="16dp" />
+        android:text="Add Review" />
 
 </LinearLayout>
