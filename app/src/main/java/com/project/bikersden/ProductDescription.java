@@ -11,10 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProductDescription extends AppCompatActivity {
     private ImageView imageViewProduct,viewCart;
-    private TextView textViewProductName, textViewProductDescription;
+    private TextView textViewProductName, textViewProductDescription,textViewProductPrice;
     private Button buttonAddToCart, buttonAddReview;
     private EditText editTextReview;
 
@@ -30,6 +31,7 @@ public class ProductDescription extends AppCompatActivity {
         imageViewProduct = findViewById(R.id.imageViewProduct);
         textViewProductName = findViewById(R.id.textViewProductName);
         textViewProductDescription = findViewById(R.id.textViewProductDescription);
+        textViewProductPrice  = findViewById(R.id.textPrice);
         buttonAddToCart = findViewById(R.id.buttonAddToCart);
         editTextReview = findViewById(R.id.editTextReview);
         buttonAddReview = findViewById(R.id.buttonAddReview);
@@ -39,6 +41,7 @@ public class ProductDescription extends AppCompatActivity {
         imageViewProduct.setImageResource(product.getImageResourceId());
         textViewProductName.setText(product.getName());
         textViewProductDescription.setText(product.getDescription());
+        textViewProductPrice.setText(product.getPrice());
 
         // view cart
         viewCart.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +49,7 @@ public class ProductDescription extends AppCompatActivity {
             public void onClick(View view) {
                 // cart layout
                 startActivity(new Intent(ProductDescription.this,Cart.class));
+
             }
         });
 
@@ -53,8 +57,16 @@ public class ProductDescription extends AppCompatActivity {
         buttonAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Add the product to the cart
-                // Implement your logic here
+                DatabaseManager db = new DatabaseManager(ProductDescription.this);
+                int id = imageViewProduct.getId();
+                String name = textViewProductName.getText().toString();
+                String description = textViewProductDescription.getText().toString();
+                String price = textViewProductPrice.getText().toString();
+                if(db.addToCart(name,id,description,price)){
+                    Toast.makeText(ProductDescription.this,"Added to Cart",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(ProductDescription.this,"Failed",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

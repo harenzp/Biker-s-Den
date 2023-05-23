@@ -34,6 +34,7 @@ public class Shop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+        getSupportActionBar().hide();
 
         listViewProducts = findViewById(R.id.listViewProducts);
         editTextSearch = findViewById(R.id.editTextSearch);
