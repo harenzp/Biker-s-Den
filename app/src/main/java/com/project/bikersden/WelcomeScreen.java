@@ -14,7 +14,7 @@ import android.widget.Button;
 public class WelcomeScreen extends AppCompatActivity {
 
 
-    Button shopBtn, servicesBtn;
+    Button shopBtn, servicesBtn, bikeSetupsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,9 @@ public class WelcomeScreen extends AppCompatActivity {
 
         servicesBtn = (Button) findViewById(R.id.services);
         servicesBtn.setOnClickListener(new servicesBtnListener());
+
+        bikeSetupsBtn = (Button) findViewById(R.id.browsebikes);
+        bikeSetupsBtn.setOnClickListener(new bikeSetupsBtnListener());
 
 
     }
@@ -46,6 +49,14 @@ public class WelcomeScreen extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             startActivity(new Intent(WelcomeScreen.this,Services.class));
+        }
+    }
+
+    public class bikeSetupsBtnListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(WelcomeScreen.this, BikeSetups.class));
         }
     }
 
