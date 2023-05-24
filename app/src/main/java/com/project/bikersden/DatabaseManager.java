@@ -57,8 +57,8 @@ public class DatabaseManager extends SQLiteOpenHelper{
     public static final String columnProductName = "product_name";
 
 
-    private List<Cart.Product> productList = new ArrayList<>();
 
+    private List<Cart.Product> productList = new ArrayList<>();
 
 
 
@@ -88,45 +88,55 @@ public class DatabaseManager extends SQLiteOpenHelper{
 
     }
 
-    public List<Cart.Product> populateProductList() {
-        SQLiteDatabase db = getReadableDatabase();
-        String[] projection = {
-                columnProductName,
-                columnPicture,
-                columnInfo,
-                columnPrice
-        };
+        public List<Cart.Product> populateProductList() {
+            SQLiteDatabase db = getReadableDatabase();
+            String[] projection = {
+                    columnProductName,
+                    columnPicture,
+                    columnInfo,
+                    columnPrice,
+                    columnAccountId
+            };
 
-        Cursor cursor = db.query(
-                columnPRODUCT,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+            String selection = columnAccountId + " = ?";
+            String[] selectionArgs = { String.valueOf(getCurrentId())};
 
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                String productName = cursor.getString(cursor.getColumnIndex(columnProductName));
-                int imageResource = cursor.getInt(cursor.getColumnIndex(columnPicture));
-                String description = cursor.getString(cursor.getColumnIndex(columnInfo));
-                String price = cursor.getString(cursor.getColumnIndex(columnPrice));
+            Cursor cursor = db.query(
+                    columnPRODUCT,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null
+            );
 
-                // Create a new Product object with retrieved data
-                Cart.Product product = new Cart.Product(productName, imageResource, description, price);
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    String productName = cursor.getString(0);
+                    int imageResource = cursor.getInt(1);
+                    String description = cursor.getString(2);
+                    String price = cursor.getString(3);
 
-                // Add the product to the ProductList
-                productList.add(product);
+                    // Create a new Product object with retrieved data
+                    Cart.Product product = new Cart.Product(productName, imageResource, description, price);
 
-            } while (cursor.moveToNext());
-            cursor.close();
+                    // Add the product to the ProductList
+                    productList.add(product);
+
+                } while (cursor.moveToNext());
+                cursor.close();
+            }
+
+            db.close();
+
+
+
+
+            return productList;
         }
 
-        db.close();
-        return productList;
-    }
+
 
 
     @Override

@@ -50,45 +50,11 @@ public class Shop extends AppCompatActivity {
 
 
         // Add a TextWatcher to filter the list based on search query
-        editTextSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String query = s.toString().toLowerCase();
-                List<Product> filteredList = new ArrayList<>();
-
-                for (Product product : productList) {
-                    if (product.getName().toLowerCase().contains(query)) {
-                        filteredList.add(product);
-                    }
-                }
-
-                adapter.setProductList(filteredList);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
+        editTextSearch.addTextChangedListener(new editTextListen());
 
         // Add a click listener to the search button to clear the search query
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editTextSearch.setText("");
-            }
-        });
-
-        viewCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // cart layout
-                startActivity(new Intent(Shop.this,Cart.class));
-            }
-        });
+        buttonSearch.setOnClickListener(new btnSearchListener());
+        viewCart.setOnClickListener(new viewClickListener());
 
         productList.add(new Product("Frisco Sportster Gas Tank", R.drawable.frisco,
                 "Frisco Mount Sportster Gas Tank - Standard Width - Bayonet Filler - 2.5 gallon", "₱6000"));
@@ -116,6 +82,52 @@ public class Shop extends AppCompatActivity {
                 "W2 into 1 Exhaust System 1999-2005 H-D Dyna", "₱8000"));
         // ...
     }
+
+
+    public class editTextListen implements TextWatcher{
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+            String query = s.toString().toLowerCase();
+            List<Product> filteredList = new ArrayList<>();
+
+            for (Product product : productList) {
+                if (product.getName().toLowerCase().contains(query)) {
+                    filteredList.add(product);
+                }
+            }
+
+            adapter.setProductList(filteredList);
+        }
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    }
+
+    public class btnSearchListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            editTextSearch.setText("");
+        }
+    }
+
+    public class viewClickListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(Shop.this,Cart.class));
+        }
+    }
+
+
+
+
+
+
 
     private class ProductAdapter extends BaseAdapter {
         private Context context;

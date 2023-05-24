@@ -1,9 +1,11 @@
 package com.project.bikersden;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,13 @@ public class Cart extends AppCompatActivity {
 
 
     private ListView listViewProducts;
-    private ProductAdapter adapter;
-    private List<Cart.Product> productList;
+
+    List<Product> productList = new ArrayList<>();
+
+    String[] prodNames = {"Frisco Sportster Gas Tank", "Keystone Handlebar", "Firestone Sawtooth Tires", "Shotgun Exhaust", "Ape Hanger Handlebar",
+            "Shinko SR777 Tires", "Bates Baja Tires", "T-Bars Handlebars", "Cone Shovelhead Exhaust", "Wassell Peanut Gas Tank",
+            "WX Split Gas Tanks", "Dyna Exhaust Pipe"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,32 +39,98 @@ public class Cart extends AppCompatActivity {
         DatabaseManager db = new DatabaseManager(Cart.this);
 
 
-        listViewProducts = findViewById(R.id.listViewProducts);
+
+        List<Product> newProductList = new ArrayList<>();
+
+
+
+        listViewProducts = (ListView) findViewById(R.id.listViewProducts);
+
+        ProductAdapter adapter = new ProductAdapter(Cart.this, newProductList);
+        listViewProducts.setAdapter(adapter);
 
         productList = db.populateProductList();
 
 
-        adapter = new ProductAdapter(this, productList);
-        listViewProducts.setAdapter(adapter);
+
+
+        for(int i = 0; i < productList.size(); i++){
+                Cart.Product p = productList.get(i);
+
+                String name = p.getName();
+                int id = p.getImageResourceId();
+                String description = p.getDescription();
+                String price = p.getPrice();
+
+                if(name.equals(prodNames[0])){
+                    newProductList.add(new Cart.Product(name,R.drawable.frisco,description,price));
+                }else{
+                    System.out.println("Hatdog");
+                }
+                if(name.equals(prodNames[1])){
+                    newProductList.add(new Cart.Product(name,R.drawable.zbars,description,price));
+                }
+                if(name.equals(prodNames[2])){
+                    newProductList.add(new Cart.Product(name,R.drawable.firestone,description,price));
+                }
+                if(name.equals(prodNames[3])){
+                    newProductList.add(new Cart.Product(name,R.drawable.shotgun,description,price));
+                }
+                if(name.equals(prodNames[4])){
+                    newProductList.add(new Cart.Product(name,R.drawable.apehanger,description,price));
+                }
+                if(name.equals(prodNames[5])){
+                    newProductList.add(new Cart.Product(name,R.drawable.shinko,description,price));
+                }
+                if(name.equals(prodNames[6])){
+                    newProductList.add(new Cart.Product(name,R.drawable.bates,description,price));
+                }
+                if(name.equals(prodNames[7])){
+                    newProductList.add(new Cart.Product(name,R.drawable.tbars,description,price));
+                }
+                if(name.equals(prodNames[8])){
+                    newProductList.add(new Cart.Product(name,R.drawable.coneshovelhead,description,price));
+                }
+                if(name.equals(prodNames[9])){
+                    newProductList.add(new Cart.Product(name,R.drawable.peanut,description,price));
+                }
+                if(name.equals(prodNames[10])){
+                    newProductList.add(new Cart.Product(name,R.drawable.split,description,price));
+                }
+                if(name.equals(prodNames[11])){
+                    newProductList.add(new Cart.Product(name,R.drawable.dyna,description,price));
+                }
+
+
+
+
+            System.out.print("Name: "  + p.getName() + " Id: " + p.getImageResourceId() + " Description: " + p.getDescription() + " Price" +
+                    ": " + p.getPrice() + "\n");
+
+
+        }
+
+
+
+
+
+        System.out.println("Product List Size: " + productList.size());
+        System.out.println("Hello World");
+
+
 
 
 
 
     }
 
-
-    private class ProductAdapter extends BaseAdapter {
+    public class ProductAdapter extends BaseAdapter {
         private Context context;
-        private List<Cart.Product> productList;
+        private List<Product> productList;
 
-        ProductAdapter(Context context, List<Cart.Product> productList) {
+        public ProductAdapter(Context context, List<Product> productList) {
             this.context = context;
             this.productList = productList;
-        }
-
-        void setProductList(List<Cart.Product> productList) {
-            this.productList = productList;
-            notifyDataSetChanged();
         }
 
         @Override
@@ -87,30 +160,27 @@ public class Cart extends AppCompatActivity {
             TextView textViewProductDescription = convertView.findViewById(R.id.textViewProductDescription);
             TextView textViewPrice = convertView.findViewById(R.id.textViewPrice);
 
-            Cart.Product product = productList.get(position);
+            Product product = productList.get(position);
             imageViewProduct.setImageResource(product.getImageResourceId());
             textViewProductName.setText(product.getName());
             textViewProductDescription.setText(product.getDescription());
             textViewPrice.setText(product.getPrice());
 
-          /*  convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Start ProductDescriptionActivity with the selected product
-                    Intent intent = new Intent(context, ProductDescription.class);
-                    intent.putExtra("product", product);
-                    context.startActivity(intent);
-                }
-            });
 
-           */
+
 
             return convertView;
         }
     }
-    static class Product implements Serializable {
+
+
+
+
+    static class Product implements Serializable{
         private String name, description, price;
         private int imageResourceId;
+
+        static String prodName = "";
 
         Product(String name, int imageResourceId, String description, String price) {
             this.name = name;
@@ -120,7 +190,7 @@ public class Cart extends AppCompatActivity {
         }
 
         String getName() {
-            return name;
+             return name;
         }
         String getDescription() { return description; }
         String getPrice() { return price; }
@@ -128,4 +198,7 @@ public class Cart extends AppCompatActivity {
             return imageResourceId;
         }
     }
+
+
+
 }
