@@ -51,10 +51,10 @@
             android:foreground="@color/black"/>
 
         <Button
-            android:id="@+id/buttonSearch"
+            android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search" />
+            android:text="Delete" />
 
     </LinearLayout>
 

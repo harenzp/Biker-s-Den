@@ -279,6 +279,35 @@ public class DatabaseManager extends SQLiteOpenHelper{
        return currId;
     }
 
+    public boolean deleteCart(){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String tableName = columnPRODUCT;
+        String delete = columnAccountId + " = ?";
+        String[] argument = {String.valueOf(getCurrentId())};
+
+
+
+        int isDeleted = db.delete(tableName,delete,argument);
+
+        return isDeleted > 0;
+    }
+
+
+    public boolean deleteAccount(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String tableName = columnUSER;
+        String delete = columnID + " = ?";
+        String[] argument = {String.valueOf(getCurrentId())};
+
+        int isDeleted = db.delete(tableName,delete,argument);
+
+        return isDeleted > 0;
+    }
+
+
 
 
 

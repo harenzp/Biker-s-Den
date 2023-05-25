@@ -7,13 +7,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +28,9 @@ public class Cart extends AppCompatActivity {
 
 
 
+    Button deleteBtn;
     private ListView listViewProducts;
+
 
     List<Product> productList = new ArrayList<>();
 
@@ -107,6 +114,9 @@ public class Cart extends AppCompatActivity {
             System.out.print("Name: "  + p.getName() + " Id: " + p.getImageResourceId() + " Description: " + p.getDescription() + " Price" +
                     ": " + p.getPrice() + "\n");
 
+                deleteBtn = (Button) findViewById(R.id.buttonDelete);
+                deleteBtn.setOnClickListener(new deleteBtnListerner());
+
 
         }
 
@@ -123,6 +133,23 @@ public class Cart extends AppCompatActivity {
 
 
     }
+
+
+
+
+    public class deleteBtnListerner implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            DatabaseManager db =  new DatabaseManager(Cart.this);
+            if(db.deleteCart()){
+                Toast.makeText(Cart.this, "Items has been Deleted", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(Cart.this, "There is no items to be deleted", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     public class ProductAdapter extends BaseAdapter {
         private Context context;
